@@ -2,7 +2,6 @@ import { Routes } from '@angular/router';
 import { TrainingsDocsComponent } from './pages/trainings-docs/trainings-docs.component';
 import { CreateTrainingDocsComponent } from './pages/create-training-docs/create-training-docs.component';
 import { ConfigurationComponent } from './pages/configuration/configuration.component';
-import { CreateTrainingAIComponent } from './pages/create-training-AI/create-training-ai.component';
 import { ChatComponent } from './shared/components/chat/chat.component';
 import { LayoutComponent } from './shared/layout/layout.component';
 import { AuthGuard } from './shared/guards/AuthGuard/auth.guard';
@@ -29,7 +28,7 @@ export const routes: Routes = [
             },
             {
                 path: 'user',
-                loadChildren: () => import('./pages/create-training-docs/create-training-docs.component').then(m => m.CreateTrainingDocsComponent),
+                loadChildren: () => import('./pages/users/users.module').then(m => m.UsersModule),
             },
             {
                 path: '**',

@@ -3,7 +3,7 @@ import { Inject, Injectable } from '@angular/core';
 import { ModelsOpenAI, OpenAiModelsResponse, Training, TrainingCreate, TrainingResponse } from '../../interfaces/training.interface';
 import { map, Observable, tap } from 'rxjs';
 import { OpenAICreateFientuning, OpenaiFinetuningCreated, OpenaiFinetuningListResponse, OpenaiFinetuningResponse, OpenAIModel } from '../../interfaces/openai.interfaces';
-import { Lead, LeadResponse, StateLead } from '../../interfaces/leads.interface';
+import { Lead, LeadResponse, StateLead, User } from '../../interfaces/leads.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -19,6 +19,21 @@ export class ApiService {
 
   changeStatus(idRow: number, state: StateLead): Observable<{ success: boolean, message: string}>{
     return this.http.post<{ success: boolean, message: string}>('/lead/change-state', { state: state, id: idRow })
+    .pipe(map((res) => res))
+  }
+
+  getUsers(): Observable<User[]>{
+    return this.http.get<{ success: boolean, data: User[]}>('/user/alls')
+    .pipe(map((res) => res.data))
+  }
+
+  createUser(email: string, name: string, password: string){
+    return this.http.post<{ success: boolean, message: string}>('/user/create', { email, name, password})
+    .pipe(map((res) => res))
+  }
+
+  deleteUser(id: string): Observable<{ success: boolean, data: User}>{
+    return this.http.delete<{ success: boolean, data: User}>(`/user/delete/${id}`)
     .pipe(map((res) => res))
   }
 

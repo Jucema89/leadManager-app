@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { FormTrainAIComponent } from './form-train-ai.component';
+import { UserCardComponent } from './user-card.component';
 
-describe('FormTrainAIComponent', () => {
-  let component: FormTrainAIComponent;
-  let fixture: ComponentFixture<FormTrainAIComponent>;
+describe('UserCardComponent', () => {
+  let component: UserCardComponent;
+  let fixture: ComponentFixture<UserCardComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [FormTrainAIComponent]
+      imports: [UserCardComponent]
     })
     .compileComponents();
     
-    fixture = TestBed.createComponent(FormTrainAIComponent);
+    fixture = TestBed.createComponent(UserCardComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

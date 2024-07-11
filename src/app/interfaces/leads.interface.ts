@@ -29,6 +29,8 @@ export interface User {
     updatedAt: string;
 }
 
+export type UserCreate = Omit<User, 'id' | 'role' | 'password' | 'createdAt' | 'updatedAt' | 'leadsAssign'>
+
 export interface LeadResponse {
     success: boolean;
     data: Lead[] | Lead;

@@ -106,7 +106,7 @@ export class AuthService {
       );
   }
 
-  getUser(): Promise<UserStore | string> {
+  getUser(): Promise<User | string> {
     return new Promise((result, reject) => {
       try {
 

@@ -1,0 +1,59 @@
+<div class="max-w-[85rem] px-4 py-4 sm:px-6 lg:px-8 lg:py-4 mx-auto">
+  
+    <div class="mx-auto max-w-2xl">
+      <!-- Card -->
+      <div class="mt-5 p-4 relative bg-white border rounded-xl sm:mt-10 md:p-10 dark:bg-neutral-900 dark:border-neutral-700">
+
+        <p class="text-2xl text-gray-800 pb-2 font-bold sm:text-2xl dark:text-white">
+          Crear Nuevo Closer
+        </p>
+
+        <form [formGroup]="form">
+
+          <app-input 
+            [control]="'name'" 
+            [inputType]="'text'"
+            [placeholder]="'Jose pepe'"
+            [label]="'Nombre'"
+            [type]="'text'" 
+            [formGroup]="form" 
+            [errorMessage]="'El Nombre esta mal'" 
+          />
+
+          <app-input 
+            [control]="'email'" 
+            [inputType]="'text'"
+            [placeholder]="'mymail@mail.com'"
+            [label]="'Email'"
+            [type]="'text'" 
+            [formGroup]="form" 
+            [errorMessage]="'El Nombre esta mal'" 
+          />
+
+          <app-input-password
+            [control]="'password'"
+            [formGroup]="form"
+            controlRepeat=""
+          />
+       
+
+          <div class="mt-6 grid">
+            @if(loadingButton){
+              <button type="submit" class="w-full py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-purple-600 text-white hover:bg-purple-700 disabled:opacity-50 disabled:pointer-events-none" 
+              [disabled]="true">
+                <span class="animate-spin inline-block size-4 border-[3px] border-current border-t-transparent text-white rounded-full" role="status" aria-label="loading"></span>
+                Esperando a OpenAI
+              </button>
+              
+            } @else {
+              <button type="submit" class="w-full py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-purple-600 text-white hover:bg-purple-700 disabled:opacity-50 disabled:pointer-events-none" 
+              [disabled]="form.invalid || !form.touched" (click)="onSubmit()">
+                Crear Usuario
+              </button>
+            }
+            
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>

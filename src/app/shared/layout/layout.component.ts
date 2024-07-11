@@ -3,6 +3,10 @@ import { BreakpointObserver, Breakpoints, BreakpointState } from '@angular/cdk/l
 import { Component, inject, OnInit } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { SidebarComponent } from '../components/sidebar/sidebar.component';
+import { ApiService } from '../../services/api/api.service';
+import { User, UserCreate } from '../../interfaces/leads.interface';
+import { LocalStorageService } from '../../services/localStorage/localstorage.service';
+import { AuthService } from '../../auth/services/auth.service';
 
 @Component({
     selector: 'app-layout',
@@ -12,6 +16,13 @@ import { SidebarComponent } from '../components/sidebar/sidebar.component';
     imports: [CommonModule, SidebarComponent, RouterModule ]
 })
 export class LayoutComponent implements OnInit {
+    user!: UserCreate
+    constructor(
+      private authService: AuthService,
+
+    ){}
+
+
     isMobile: boolean = false
     menuArray = [
       { 
@@ -39,6 +50,17 @@ export class LayoutComponent implements OnInit {
       .subscribe((state: BreakpointState) => {
         this.isMobile = state.matches;
       });
+
+      this.authService.getUser().then((user) => {
+        if(typeof(user) !== 'string'){
+          this.user = user
+        }
+      })
+
+    }
+
+    logout(){
+      this.authService.logOut()
     }
  
 }

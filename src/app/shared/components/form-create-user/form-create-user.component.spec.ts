@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CreatorCardComponent } from './creator-card.component';
+import { FormCreateUserComponent } from './form-create-user.component';
 
-describe('CreatorCardComponent', () => {
-  let component: CreatorCardComponent;
-  let fixture: ComponentFixture<CreatorCardComponent>;
+describe('FormCreateUserComponent', () => {
+  let component: FormCreateUserComponent;
+  let fixture: ComponentFixture<FormCreateUserComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [CreatorCardComponent]
+      imports: [FormCreateUserComponent]
     })
     .compileComponents();
     
-    fixture = TestBed.createComponent(CreatorCardComponent);
+    fixture = TestBed.createComponent(FormCreateUserComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

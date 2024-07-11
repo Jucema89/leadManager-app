@@ -1,0 +1,21 @@
+<div class="flex flex-row gap-4 overflow-hidden before:absolute before:top-0 before:start-1/2 before:bg-[url('https://preline.co/assets/svg/examples/polygon-bg-element.svg')] dark:before:bg-[url('https://preline.co/assets/svg/examples-dark/polygon-bg-element.svg')] before:bg-no-repeat before:bg-top before:bg-cover before:size-full before:-z-[1] before:transform before:-translate-x-1/2">
+  <app-form-create-user class="w-[50%]" (saveFrom)="handleSave($event)"/>
+  <div class="max-w-2xl w-[50%] px-4 py-4 sm:px-6 lg:px-8 lg:py-4 mx-auto">
+    <!-- Card -->
+    <div class="mt-5 p-4 relative bg-white border rounded-xl sm:mt-10 md:p-10 dark:bg-neutral-900 dark:border-neutral-700">
+      <p class="text-2xl text-gray-800 pb-2 font-bold sm:text-2xl dark:text-white">
+        Listado de Closers
+      </p>
+      @for(user of users; track user.id){
+        <app-user-card
+          [user]="user"
+          (emitRemove)="handleRemove($event)"
+        />
+      }
+    </div>
+  </div>
+</div>
+
+
+
+ 
