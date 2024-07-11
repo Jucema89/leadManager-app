@@ -1,7 +1,7 @@
 <div class="max-w-[85rem] px-4 py-4 sm:px-6 lg:px-8 lg:py-4 mx-auto">
 
   @if(messageNeedConfig){
-    <div class="bg-blue-50 border mb-8 border-blue-200 text-sm text-blue-600 rounded-lg p-4 dark:bg-white/10 dark:border-white/10 dark:text-blue-400" role="alert">
+    <div class="bg-purple-50 border mb-8 border-purple-200 text-sm text-purple-600 rounded-lg p-4 dark:bg-white/10 dark:border-white/10 dark:text-purple-400" role="alert">
       <div class="flex">
         <div class="flex-shrink-0">
           <svg class="flex-shrink-0 size-4 mt-0.5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -68,7 +68,7 @@
             <small class="text-gray-500">Para poder realizar Finetuning de Modelos, debes tener archivos <span class="inline-flex items-center gap-x-.5 py-.5 px-1.5 rounded-full text-2xs font-medium bg-gray-800 text-white dark:bg-white dark:text-neutral-800">.jsonl</span> validos. Para ello dirigete a Docs Trainers y crealos usando tus propios documentos. 
             </small>
 
-            <a class="inline-flex items-center gap-x-1 text-sm text-blue-600 decoration-2 hover:underline font-medium dark:text-blue-500" href="/docs/create">
+            <a class="inline-flex items-center gap-x-1 text-sm text-purple-600 decoration-2 hover:underline font-medium dark:text-purple-500" href="/docs/create">
               Crear mis archivos de entrenamiento
               <svg class="flex-shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
             </a>
@@ -91,14 +91,14 @@
 
           <div class="mt-6 grid">
             @if(loadingButton){
-              <button type="submit" class="w-full py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none" 
+              <button type="submit" class="w-full py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-purple-600 text-white hover:bg-purple-700 disabled:opacity-50 disabled:pointer-events-none" 
               [disabled]="true">
                 <span class="animate-spin inline-block size-4 border-[3px] border-current border-t-transparent text-white rounded-full" role="status" aria-label="loading"></span>
                 Esperando a OpenAI
               </button>
               
             } @else {
-              <button type="submit" class="w-full py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none" 
+              <button type="submit" class="w-full py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-purple-600 text-white hover:bg-purple-700 disabled:opacity-50 disabled:pointer-events-none" 
               [disabled]="formTrainAI.invalid || !formTrainAI.touched" (click)="onSubmit()">
                 Entrenar Modelo
               </button>

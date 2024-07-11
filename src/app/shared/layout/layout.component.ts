@@ -13,6 +13,24 @@ import { SidebarComponent } from '../components/sidebar/sidebar.component';
 })
 export class LayoutComponent implements OnInit {
     isMobile: boolean = false
+    menuArray = [
+      { 
+        id: 1,
+        title: 'Dashboard', 
+        link: '/dashboard'
+      },
+      { 
+        id: 2,
+        title: 'Leads', 
+        link: '/leads'
+      },
+      { 
+        id: 3,
+        title: 'Users',
+        link: '/user'
+      },
+      
+    ]
 
     private breakpointObserver = inject(BreakpointObserver);
 

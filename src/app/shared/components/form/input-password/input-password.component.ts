@@ -29,7 +29,7 @@ export class InputPasswordComponent implements OnInit, OnDestroy {
   showPass: boolean = false
   messageErrorRepeat = 'Passwords are not the same'
 
-  normalClass: string = "block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6 disabled:opacity-50 disabled:pointer-events-none"
+  normalClass: string = "block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-purple-600 sm:text-sm sm:leading-6 disabled:opacity-50 disabled:pointer-events-none"
 
   errorClass: string = "px-3.5 py-2 block w-full border-red-500 rounded-md text-sm focus:border-red-500 focus:ring-red-500 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400"
 
@@ -54,32 +54,33 @@ export class InputPasswordComponent implements OnInit, OnDestroy {
     return this.formGroup.get(this.control)
   }
 
-  // validatePassEquals(){
-  //   return this.formGroup.get(this.controlRepeat)?.value === this.formGroup.get(this.control)?.value
-  // }
-
   ngOnInit() {
     //pass
-    this.passValid$ = (this.formGroup.get(this.control) as FormControl).valueChanges.subscribe((pass) => {
-      if(pass === this.formGroup.get(this.controlRepeat)?.value){
-        this.repeatValid = true
-      } else {
-        this.repeatValid = false
-      }
-    })
-    //repeat pass
-    this.repeatValid$ = (this.formGroup.get(this.controlRepeat) as FormControl).valueChanges.subscribe((repeat) => {
-      if(repeat === this.formGroup.get(this.control)?.value){
-        this.repeatValid = true
-      } else {
-        this.repeatValid = false
-      }
-    })
+    if(this.controlRepeat !== ''){
+      this.passValid$ = (this.formGroup.get(this.control) as FormControl).valueChanges.subscribe((pass) => {
+        if(pass === this.formGroup.get(this.controlRepeat)?.value){
+          this.repeatValid = true
+        } else {
+          this.repeatValid = false
+        }
+      })
+      //repeat pass
+      this.repeatValid$ = (this.formGroup.get(this.controlRepeat) as FormControl).valueChanges.subscribe((repeat) => {
+        if(repeat === this.formGroup.get(this.control)?.value){
+          this.repeatValid = true
+        } else {
+          this.repeatValid = false
+        }
+      })
+    }
   }
 
   ngOnDestroy(): void {
-    this.passValid$.unsubscribe()
-    this.repeatValid$.unsubscribe()
+    if(this.controlRepeat !== ''){
+      this.passValid$.unsubscribe()
+      this.repeatValid$.unsubscribe()
+    }
+   
   }
 
   setClassStyle(control: string): string {

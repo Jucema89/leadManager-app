@@ -1,0 +1,173 @@
+<div class="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
+  
+      <!-- Card -->
+      <div class="flex flex-col">
+        <div class="-m-1.5 overflow-x-auto">
+          <div class="p-1.5 min-w-full inline-block align-middle">
+            <div class="bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden dark:bg-neutral-900 dark:border-neutral-700">
+              <!-- Header -->
+              <div class="px-6 py-4 grid gap-3 md:flex md:justify-between md:items-center border-b border-gray-200 dark:border-neutral-700">
+                <div>
+                  <h2 class="text-xl font-semibold text-gray-800 dark:text-neutral-200">
+                    Lista de Leads
+                  </h2>
+                  <p class="text-sm text-gray-600 dark:text-neutral-400">
+                    Listado de leads con informacion relevante y estado actual
+                  </p>
+                </div>
+    
+                <div>
+                  <div class="inline-flex gap-x-2">
+                    <!-- <a class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-white dark:hover:bg-neutral-800" (click)="getLeads()">
+                      Ver todos
+                    </a> -->
+    
+                    <button class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-purple-600 text-white hover:bg-purple-700 disabled:opacity-50 disabled:pointer-events-none" (click)="getLeads()">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="flex-shrink-0 size-4">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0 3.181 3.183a8.25 8.25 0 0 0 13.803-3.7M4.031 9.865a8.25 8.25 0 0 1 13.803-3.7l3.181 3.182m0-4.991v4.99" />
+                        </svg>
+                     
+                     Recargar Leads
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <!-- End Header -->
+    
+              <!-- Table -->
+              <table class="min-w-full divide-y divide-gray-200 dark:divide-neutral-700">
+                <thead class="bg-gray-50 dark:bg-neutral-900">
+                  <tr>
+                    @for(header of tableHeader; track header){
+                      <th scope="col" class="px-6 py-3 text-start size-px whitespace-nowrap">
+                        <div class="flex items-center gap-x-2">
+                          <span class="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-neutral-200">
+                            {{ header }}
+                          </span>
+                        </div>
+                      </th>
+                    }
+                  </tr>
+                </thead>
+  
+                <tbody class="divide-y divide-gray-200 dark:divide-neutral-700 max-h-[10vh] overflow-y-scroll">
+  
+                  @if(!messageNeedConfig && lodingRow && !leads.length){
+                    <tr>
+                      <td class="w-full h-4 bg-gray-200 rounded animate-pulse dark:bg-neutral-700"></td>
+                      <td class="w-full h-4 bg-gray-200 rounded animate-pulse dark:bg-neutral-700"></td>
+                      <td class="w-full h-4 bg-gray-200 rounded animate-pulse dark:bg-neutral-700"></td>
+                      <td class="w-full h-4 bg-gray-200 rounded animate-pulse dark:bg-neutral-700"></td>
+                      <td class="w-full h-4 bg-gray-200 rounded animate-pulse dark:bg-neutral-700"></td>
+                      <td class="w-full h-4 bg-gray-200 rounded animate-pulse dark:bg-neutral-700"></td>
+                    </tr>
+                  }
+  
+                  @for (lead of leads ; track lead.id){
+                    <tr>
+                      <td class="size-px whitespace-nowrap">
+                        <div class="px-6 py-3">
+                          <span class="text-sm text-gray-600 dark:text-neutral-400">
+                            {{ lead.agendacion | date }}
+                          </span>
+                        </div>
+                      </td>
+                      <td class="size-px whitespace-nowrap">
+                        <div class="px-6 py-3">
+                          <div class="flex items-center gap-x-2">
+                            <span class="inline-flex items-center justify-center size-6 rounded-full bg-purple-700 dark:bg-neutral-700">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="flex-shrink-0 size-4 text-white">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75" />
+                                </svg>
+                                  
+                            </span>
+                            <div class="grow">
+                              <span class="text-sm text-gray-600 dark:text-neutral-400">
+                                {{ lead.email }}
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+                      </td>
+                      <td class="size-px whitespace-nowrap">
+                        <div class="px-6 py-3">
+                          <span class="text-sm text-gray-600 dark:text-neutral-400">
+                            {{ lead.utm_source }}
+                          </span>
+                        </div>
+                      </td>
+                      <td class="size-px whitespace-nowrap">
+                        <div class="px-6 py-3">
+                          <app-badge-status
+                            [message]="handlerStatus(lead.state || 'unmanaged').message"
+                            [type]="handlerStatus(lead.state || 'unmanaged').type">
+                          </app-badge-status>
+                        </div>
+                      </td>
+                    
+                      <td class="size-px whitespace-nowrap">
+                        <div class="px-6 py-3">
+                          
+                          <span class="text-sm text-gray-600 dark:text-neutral-400">
+                            {{ lead.closer_name }}
+                          </span>
+                        </div>
+                      </td>
+                      
+                      <td class="size-px whitespace-nowrap">
+                        <div class="px-6 py-1.5">
+                          <div class="hs-dropdown [--placement:bottom-right] relative inline-block">
+                            <button id="hs-table-dropdown-2" type="button" class="hs-dropdown-toggle py-1.5 px-2 inline-flex justify-center items-center gap-2 rounded-lg text-gray-700 align-middle disabled:opacity-50 disabled:pointer-events-none focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-purple-600 transition-all text-sm dark:text-neutral-400 dark:hover:text-white dark:focus:ring-offset-gray-800">
+                              <svg class="flex-shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg>
+                            </button>
+                            <div class="hs-dropdown-menu transition-[opacity,margin] duration hs-dropdown-open:opacity-100 opacity-0 hidden divide-y divide-gray-200 min-w-40 z-10 bg-white shadow-2xl rounded-lg p-2 mt-2 dark:divide-neutral-700 dark:bg-neutral-800 dark:border dark:border-neutral-700" aria-labelledby="hs-table-dropdown-2">
+                              <div class="py-2 first:pt-0 last:pb-0">
+                                <button class="flex w-full items-center gap-x-3 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:ring-2 focus:ring-purple-500 dark:text-neutral-400 dark:hover:bg-neutral-700 dark:hover:text-neutral-300" (click)="changeStatus(lead.id_row, 'unmanaged')">
+                                  Sin Gestionar
+                                </button>
+                                <button class="flex w-full items-center gap-x-3 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:ring-2 focus:ring-purple-500 dark:text-neutral-400 dark:hover:bg-neutral-700 dark:hover:text-neutral-300" (click)="changeStatus(lead.id_row, 'contacted')">
+                                    Contactado
+                                </button>
+                                <button class="flex w-full items-center gap-x-3 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:ring-2 focus:ring-purple-500 dark:text-neutral-400 dark:hover:bg-neutral-700 dark:hover:text-neutral-300" (click)="changeStatus(lead.id_row, 'await_answer')">
+                                    Esperando Respuesta
+                                </button>
+                                <button class="flex w-full items-center gap-x-3 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:ring-2 focus:ring-purple-500 dark:text-neutral-400 dark:hover:bg-neutral-700 dark:hover:text-neutral-300" (click)="changeStatus(lead.id_row, 'in_call')">
+                                    En Llamada
+                                </button>
+                                <button class="flex w-full items-center gap-x-3 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:ring-2 focus:ring-purple-500 dark:text-neutral-400 dark:hover:bg-neutral-700 dark:hover:text-neutral-300" (click)="changeStatus(lead.id_row, 'win')">
+                                    Ganado
+                                </button>
+                                <button class="flex w-full items-center gap-x-3 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:ring-2 focus:ring-purple-500 dark:text-neutral-400 dark:hover:bg-neutral-700 dark:hover:text-neutral-300" (click)="changeStatus(lead.id_row, 'lose')">
+                                    Perdido
+                                </button>
+                              </div>
+                             
+                            </div>
+                          </div>
+                        </div>
+                      </td>
+                  </tr>
+                  }
+                </tbody>
+  
+              </table>
+              <!-- End Table -->
+    
+              <!-- Footer -->
+              <div class="px-6 py-4 grid gap-3 md:flex md:justify-between md:items-center border-t border-gray-200 dark:border-neutral-700">
+                <div>
+                  <p class="text-sm text-gray-600 dark:text-neutral-400">
+                    <span class="font-semibold text-gray-800 dark:text-neutral-200">
+                      {{ leads.length }}
+                    </span> resultados
+                  </p>
+                </div>
+              </div>
+              <!-- End Footer -->
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- End Card -->
+    </div>
+  

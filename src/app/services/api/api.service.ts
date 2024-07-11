@@ -3,6 +3,7 @@ import { Inject, Injectable } from '@angular/core';
 import { ModelsOpenAI, OpenAiModelsResponse, Training, TrainingCreate, TrainingResponse } from '../../interfaces/training.interface';
 import { map, Observable, tap } from 'rxjs';
 import { OpenAICreateFientuning, OpenaiFinetuningCreated, OpenaiFinetuningListResponse, OpenaiFinetuningResponse, OpenAIModel } from '../../interfaces/openai.interfaces';
+import { Lead, LeadResponse, StateLead } from '../../interfaces/leads.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -10,6 +11,16 @@ import { OpenAICreateFientuning, OpenaiFinetuningCreated, OpenaiFinetuningListRe
 export class ApiService {
 
   constructor(private http: HttpClient) {}
+
+  getLeads(): Observable<Lead[]>{
+    return this.http.get<LeadResponse>('/lead/alls')
+    .pipe(map((res) => res.data as Lead[]))
+  }
+
+  changeStatus(idRow: number, state: StateLead): Observable<{ success: boolean, message: string}>{
+    return this.http.post<{ success: boolean, message: string}>('/lead/change-state', { state: state, id: idRow })
+    .pipe(map((res) => res))
+  }
 
   //Training
   getTrainings(): Observable<Training[]>{

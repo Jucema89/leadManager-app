@@ -27,9 +27,6 @@ export class SideLoginComponent implements AfterViewInit {
   StrongPasswordRegx: RegExp =
   /^(?=[^A-Z]*[A-Z])(?=[^a-z]*[a-z])(?=\D*\d).{8,}$/;
 
-  @ViewChild('googleBtn')
-  googleBtn!: ElementRef;
-
   formLogin = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")]),
     password: new FormControl('', [Validators.required, Validators.pattern(this.StrongPasswordRegx)]),
@@ -61,24 +58,7 @@ export class SideLoginComponent implements AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    this.googleInit()
-  }
 
-  googleInit(){
-
-    google.accounts.id.initialize({
-      client_id: environment.google.id,
-      callback: (response: any) => this.handleCredentialResponse( response )
-    });
-
-    google.accounts.id.renderButton(
-      this.googleBtn.nativeElement,
-      { 
-        'theme': "outline", 
-        'size': "large",
-        'longtitle': true,
-      } 
-    );
   }
 
   handleCredentialResponse(response: any){
