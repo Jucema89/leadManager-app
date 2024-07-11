@@ -1,63 +1,55 @@
-<p align="center">
-  <a href="https://strapi.io/#gh-light-mode-only">
-    <img src="https://aitrain.app/assets/img/Aitrain-logo.png" width="218px" alt="Aitrain logo" />
-  </a>
-  <a href="https://strapi.io/#gh-dark-mode-only">
-    <img src="https://aitrain.app/assets/img/Aitrain-logo-color-white.png" width="218px" alt="Aityrain logo" />
-  </a>
+<p  align="center">
+<img  src="https://raw.githubusercontent.com/Jucema89/leadManager-app/main/src/assets/img/leadman-logo.png"  width="218px"  alt="Aitrain logo"  />
 </p>
 
-<h3 align="center">Plataforma de Finetuning Open Source.</h3>
-<p align="center">Transforma los documentos de tu empresa o negocio en documentos validos para que la IA aprenda, corriendo en local sin comprometer información sensible</p>
-<p align="center"><a href="https://aitrain.app/">App Produccion</a> · <a href="https://dev.aitrain.app/">App Desarrollo</a> · <a href="https://hub.docker.com/r/juliodaza/aitrain-backend">Imagen Docker Backend</a> · <a href="https://github.com/Jucema89/aitrain-API">Github Backend</a></p>
-<br />
+  
 
+<h3  align="center">Gestor de Leads conectado a Google Sheets.</h3>
+
+<p  align="center">Conecta tu sheet con LeadMan y entrega acceso a tu equipo de ventas, gestiona los estados de tus leads desde un solo lugar.</p>
+
+<p  align="center"><a  href="https://leadman.juliodaza.com/">App Produccion</a> · <a  href="https://github.com/Jucema89/leadManager-api">Github Backend</a></p>
+
+<br  />
+
+  
+  
 
 <br>
 
-<p align="center">
-  <a href="https://strapi.io">
-    <img src="https://aitrain.app/assets/img/Aitrain_project.png" alt="Aitrain Preview Project" />
-  </a>
+  
+
+<p  align="center">
+
+<a  href="https://strapi.io">
+
+<img  src="https://raw.githubusercontent.com/Jucema89/leadManager-app/main/src/assets/img/leadman_app.png"  alt="Aitrain Preview Project"  />
+</a>
 </p>
 <br>
 
-## Como usarlo
+##  Correr en Desarollo
 
-Copia el docker compose y ejecutalo: Con el archivo se bajara la ultima imagen de **aitrain-backend** y se crearan dos servicios: uno con la base de datos de Postgres y la otra con el backend de Node, por defecto corre en el puerto 3900. Te diriges a la web de [Aitrain app](https://aitrain.app/) y en la sección de configuración colocas la url de backend y la Api Key que generas en [OpenAi](https://platform.openai.com/api-keys) ya con eso puedes generar los documentos .jsonl para entrenamiento y luego con ellos entrenar la IA de OpenAI.
-> **Nota:** De momento solo **GPT-3.5** y sus versiones son las habilitadas para Finetuning.
-
-            ##docker-compose.yml
-            version: '3.8'
-            services:
-
-              db:
-                image: postgres
-                environment:
-                  POSTGRES_DB: aitrain
-                  POSTGRES_USER: postgres
-                  POSTGRES_PASSWORD: aitrainPass
-                ports:
-                  - "6432:5432"
-                volumes:
-                  - postgres_data:/var/lib/postgresql/data
-
-              app:
-                image: juliodaza/aitrain-backend:latest
-                ports:
-                  - "3900:3900"
-                environment:
-                  DATABASE_URL: "postgresql://postgres:aitrainPass@db:5432/aitrain"
-                depends_on:
-                  - db
-
-            volumes:
-              postgres_data:
-
-## Correr en Desarollo 
 Si deseas correr la app en local debes tener la versión 20 de Node o superior:
-`git clone git@github.com:Jucema89/aitrain.git`
+### Correr Frontend Angular
+`git clone git@github.com:Jucema89/leadManager-app.git`
 `npm i`
 `ng serve`
 
-Este proyecto esta creado con Angular como Framework de frontend y los estilos vienen de [Preline](https://preline.co/docs/index.html) un framework de Estilos basado en tailwind. 
+### Correr Backend NodeJs
+`git clone git@github.com:Jucema89/leadManager-api.git`
+`npm i`
+Crear archivo de ambiente `.env` en el root del proyecto;
+```
+ENVIRONMENT='develop'
+
+PORT_EXPRESS=3900
+BACK_NODE_URL='http://localhost:3900'
+CORS_DOMAINS='http://localhost:3000,http://localhost:4200'
+DATABASE_URL='postgresql://<userPostgresql>:<pass_user>@localhost:6432/leadManager'
+```
+  dentro de `/src/conf/` mover el .json que se obtiene al crear un service Account en Google Api. aqui:  [Google Cloud Console](https://console.cloud.google.com/iam-admin/serviceaccounts)
+
+> Recuerda compartir tu google sheet con el cliente Email que genera Google dentro del servicio, el que termina en iam.gserviceaccount.com
+
+Este proyecto esta creado con Angular como Framework de frontend y los estilos vienen de [Preline](https://preline.co/docs/index.html) un framework de Estilos basado en tailwind.
