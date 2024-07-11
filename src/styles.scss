@@ -1,0 +1,61 @@
+/* You can add global styles to this file, and also import other style files */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.btn_special {
+    /* Establece el tamaño y otros estilos básicos del botón */
+    display: inline-block;
+    padding: 10px 20px;
+    border: none;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    background-size: 200% 100%;
+    border-radius: 5px;
+    text-align: center;
+    transition: background-position 2s ease, background-image 2s ease;
+    background-image: linear-gradient(to right, #5E17D8, #25CAEB);
+    background-position: 0% 50%;
+}
+.btn_special:disabled {
+    background: #d1d5db;
+    background-size: 100%;
+    transition: none;
+    color: #4b5563;
+    background-position: 100%;
+    cursor: not-allowed;
+    &:hover {
+        background: #d1d5db;
+        color: #4b5563;
+    }
+}
+  
+.btn_special:hover {
+    /* Invierte el gradiente al hacer hover, más lentamente */
+    background-image: linear-gradient(to left, #5E17D8, #25CAEB);
+    background-position: 100% 50%;
+}
+
+.btn_loader_special {
+    display: inline-block;
+    padding: 10px 20px;
+    border: none;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    background-size: 400% 100%;
+    border-radius: 5px;
+    text-align: center;
+    background-image: linear-gradient(to right, #5E17D8, #25CAEB, #5E17D8, #25CAEB, #5E17D8);
+    animation: GradientShift 5s linear infinite;
+}
+  
+@keyframes GradientShift {
+    0% {
+        background-position: 0% 50%;
+    }
+    100% {
+        background-position: -200% 50%;
+    }
+}

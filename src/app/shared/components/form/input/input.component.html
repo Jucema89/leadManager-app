@@ -1,0 +1,173 @@
+<ng-container [ngSwitch]="type">
+    <!--STRING-->
+    <div *ngSwitchCase="'text'" class="my-2">
+        <label for="hs-validation-name-error" 
+            [ngClass]="formGroup.get(control)?.disabled ? disabledLabel : normalLabel">
+            {{ label }}
+            @if(tooltip !== ''){
+                <span class="hs-tooltip [--trigger:hover] sm:[--placement:right]">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z" />
+                    </svg>
+                </span>
+
+                <div class="hs-tooltip-content hs-tooltip-shown:opacity-100 hs-tooltip-shown:visible hidden opacity-0 transition-opacity absolute invisible z-10 max-w-xs w-full bg-blue-50 border border-gray-100 text-start rounded-xl shadow-md after:absolute after:top-0 after:-start-4 after:w-4 after:h-full dark:bg-neutral-800 dark:border-neutral-700" role="tooltip">
+                    <p class="inline-flex items-center gap-x-2 px-2 py-2 text-xs text-black disabled:opacity-50 disabled:pointer-events-none dark:text-neutral-400 dark:hover:text-white">
+                        {{ tooltip }}
+                    </p>
+                </div>
+            }
+        </label>
+        <div [class]=" internLabel.length ? 'flex' : 'relative'" [formGroup]="formGroup">
+            @if(internLabel !== '' && internLabel.length){
+                <span [class]="isInvalid(control) ? errorInternalLabelClass : internalLabelClass">
+                    {{ internLabel }}
+                </span>
+            }
+            <input 
+                [readonly]="readonly"
+                [autocomplete]="'off'"
+                [type]="inputType" 
+                [formControlName]="control" 
+                [placeholder]="placeholder"
+                [class]="setClassStyle(control)" 
+                (keydown.enter)="keydownEnter.emit(true)">
+
+            <div *ngIf="icon" class="absolute inset-y-0 left-0 flex items-center pointer-events-none z-20 pl-4">
+                <svg-icon [src]="icon" [class]="isInvalid(control) ? 'h-4 w-4 text-red-400' :'h-4 w-4 text-gray-400'"></svg-icon>
+            </div>
+            @if(isInvalid(control) && !internLabel.length){
+                <div class="absolute inset-y-0 right-0 flex items-center pointer-events-none pr-3">
+                    <svg *ngIf="isInvalid(control)" class="h-4 w-4 text-red-500" width="16" height="16" fill="currentColor"
+                        viewBox="0 0 16 16" aria-hidden="true">
+                        <path
+                            d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8 4a.905.905 0 0 0-.9.995l.35 3.507a.552.552 0 0 0 1.1 0l.35-3.507A.905.905 0 0 0 8 4zm.002 6a1 1 0 1 0 0 2 1 1 0 0 0 0-2z" />
+                    </svg>
+                </div>
+            }
+        </div>
+        @if(isInvalid(control)){
+            <p class="text-xs text-red-600 mt-2">
+                {{ errorMessage }}
+            </p>
+        }
+    </div>
+    <!--TEXTAREA-->
+    <div *ngSwitchCase="'textarea'" class="my-2">
+        <label for="hs-validation-name-error" 
+            [ngClass]="formGroup.get(control)?.disabled ? disabledLabel: normalLabel">
+            {{ label }}
+
+            @if(tooltip !== ''){
+                <span class="hs-tooltip [--trigger:hover] sm:[--placement:right]">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z" />
+                    </svg>
+                </span>
+
+                <div class="hs-tooltip-content hs-tooltip-shown:opacity-100 hs-tooltip-shown:visible hidden opacity-0 transition-opacity absolute invisible z-10 max-w-xs w-full bg-blue-50 border border-gray-100 text-start rounded-xl shadow-md after:absolute after:top-0 after:-start-4 after:w-4 after:h-full dark:bg-neutral-800 dark:border-neutral-700" role="tooltip">
+                    <p class="inline-flex items-center gap-x-2 px-2 py-2 text-xs text-black disabled:opacity-50 disabled:pointer-events-none dark:text-neutral-400 dark:hover:text-white">
+                        {{ tooltip }}
+                    </p>
+                </div>
+
+            }
+
+        </label>
+        <div class="relative" [formGroup]="formGroup">
+
+            <textarea [rows]="textareaRow" [formControlName]="control" [placeholder]="placeholder"
+                [class]="this.setClassStyle(control)">
+            </textarea>
+
+            <div *ngIf="icon" class="absolute inset-y-0 left-0 flex items-center pointer-events-none z-20 pl-4">
+            </div>
+            
+            <div class="absolute inset-y-0 right-0 flex items-center pointer-events-none pr-3">
+                <svg *ngIf="isInvalid(control)" class="h-4 w-4 text-red-500" width="16" height="16" fill="currentColor"
+                    viewBox="0 0 16 16" aria-hidden="true">
+                    <path
+                        d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8 4a.905.905 0 0 0-.9.995l.35 3.507a.552.552 0 0 0 1.1 0l.35-3.507A.905.905 0 0 0 8 4zm.002 6a1 1 0 1 0 0 2 1 1 0 0 0 0-2z" />
+                </svg>
+            </div>
+        </div>
+        @if(isInvalid(control)){
+            <p class="text-xs text-red-600 mt-2">
+                {{ errorMessage }}
+            </p>
+        }
+    </div>
+    <!--SELECT-->
+    <div *ngSwitchCase="'select'" class="my-2">
+
+        <label [ngClass]="formGroup.get(control)?.disabled ? disabledLabel : normalLabel">
+            {{ label }}
+
+            @if(tooltip !== ''){
+                <span class="hs-tooltip [--trigger:hover] sm:[--placement:right]">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z" />
+                    </svg>
+                </span>
+
+                <div class="hs-tooltip-content hs-tooltip-shown:opacity-100 hs-tooltip-shown:visible hidden opacity-0 transition-opacity absolute invisible z-10 max-w-xs w-full bg-blue-50 border border-gray-100 text-start rounded-xl shadow-md after:absolute after:top-0 after:-start-4 after:w-4 after:h-full dark:bg-neutral-800 dark:border-neutral-700" role="tooltip">
+                    <p class="inline-flex items-center gap-x-2 px-2 py-2 text-xs text-black disabled:opacity-50 disabled:pointer-events-none dark:text-neutral-400 dark:hover:text-white">
+                        {{ tooltip }}
+                    </p>
+                </div>
+            }
+
+        </label>
+        <div class="" [formGroup]="formGroup">
+            <select [formControlName]="control" [class]="isInvalid(control) ? errorClass : normalClass">
+                <option disabled>Selecciona una opción</option>
+                <option [disabled]="readonly" *ngFor="let option of selectOption" [value]="option.value">
+                    {{ option.label }}
+                </option>
+            </select>
+            <div class="absolute inset-y-0 right-0 flex items-center pointer-events-none pr-8">
+                <svg *ngIf="isInvalid(control)" class="h-4 w-4 text-red-500" width="16" height="16" fill="currentColor"
+                    viewBox="0 0 16 16" aria-hidden="true">
+                    <path
+                        d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8 4a.905.905 0 0 0-.9.995l.35 3.507a.552.552 0 0 0 1.1 0l.35-3.507A.905.905 0 0 0 8 4zm.002 6a1 1 0 1 0 0 2 1 1 0 0 0 0-2z" />
+                </svg>
+            </div>
+        </div>
+        @if(isInvalid(control)){
+            <p class="text-xs text-red-600 mt-2">
+                {{ errorMessage }}
+            </p>
+        }
+    </div>
+    <!--SWITCH-->
+    <div *ngSwitchCase="'switch'" class="mt-10" [formGroup]="formGroup">
+        <input type="checkbox" [formControlName]="control"
+            class="relative shrink-0 w-11 h-6 hover:none bg-gray-100 checked:bg-none checked:bg-blue-600 border-2  rounded-full cursor-pointer transition-colors ease-in-out duration-200 border-transparent ring-1 ring-transparent focus:border-blue-600 focus:ring-blue-600 ring-offset-white focus:outline-none appearance-none dark:bg-gray-700 dark:checked:bg-blue-600 dark:focus:ring-offset-gray-800 before:inline-block before:w-5 before:h-5 before:bg-white checked:before:bg-blue-200 before:translate-x-0 checked:before:translate-x-full before:shadow before:rounded-full before:transform before:ring-0 before:transition before:ease-in-out before:duration-200 dark:before:bg-gray-400 dark:checked:before:bg-blue-200">
+        <label class="text-sm text-gray-500 ml-3 inline-flex gap-2 dark:text-gray-400 hs-tooltip [--placement:top]">
+            {{ label }}
+
+            @if(tooltip !== ''){
+                <span class="hs-tooltip [--trigger:hover] sm:[--placement:right]">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z" />
+                    </svg>
+                </span>
+    
+                <div class="hs-tooltip-content hs-tooltip-shown:opacity-100 hs-tooltip-shown:visible hidden opacity-0 transition-opacity absolute invisible z-10 max-w-xs w-full bg-blue-50 border border-gray-100 text-start rounded-xl shadow-md after:absolute after:top-0 after:-start-4 after:w-4 after:h-full dark:bg-neutral-800 dark:border-neutral-700" role="tooltip">
+                    <p class="inline-flex items-center gap-x-2 px-2 py-2 text-xs text-black disabled:opacity-50 disabled:pointer-events-none dark:text-neutral-400 dark:hover:text-white">
+                        {{ tooltip }}
+                    </p>
+                </div>
+            }
+
+        </label>
+
+        @if(isInvalid(control)){
+            <p class="text-xs text-red-600 mt-2">
+                {{ errorMessage }}
+            </p>
+        }
+
+    </div>
+
+</ng-container>
